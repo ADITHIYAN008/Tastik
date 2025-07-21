@@ -1,8 +1,10 @@
 import CartButton from "@/components/CartButton";
 import { images, offers } from "@/constants";
+import * as Sentry from "@sentry/react-native";
 import cn from "clsx";
 import React from "react";
 import {
+  Button,
   FlatList,
   Image,
   Pressable,
@@ -76,6 +78,14 @@ export default function Index() {
             </View>
             <CartButton />
           </View>
+        )}
+        ListFooterComponent={() => (
+          <Button
+            title="Try!"
+            onPress={() => {
+              Sentry.captureException(new Error("First error"));
+            }}
+          />
         )}
       />
     </SafeAreaView>
